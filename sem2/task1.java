@@ -8,28 +8,25 @@
 //select * from students where name = "Ivanov" and country = "Russia" and city = "Moscow"
 
 package Sem2;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 
 public class task1 {
-    public static void main(String[] args) {
-        Map<String, String> param = new HashMap<String, String>();
-        param.put("name", "Ivanov");
-        param.put("country", "Russia");
-        param.put("city", "Moscow");
-        param.put("age", null);
-        System.out.println(getQuery(param));
-    }
+    public static final String sql = "select * from students where ";
+    public static final String param = "{\"name\":\"Ivanov\", \"country\":\"Russia\", \"city\":\"Moscow\", \"age\":\"null\"} ";
 
-    public static String getQuery(Map<String, String> params) {
-        StringBuilder result = new StringBuilder();
-        for (Map.Entry<String, String> pair : params.entrySet()) {
-            if (pair.getValue() != null) {
-                result.append(pair.getKey() +" = '" + pair.getValue()+"' and ");
+    public static void main(String[] args) {
+        String str = param.replace("{", "").replace("}", "").replace(" ", "");
+        String[] new_str = str.split(",");
+        StringBuilder str_bui = new StringBuilder(sql);
+        for (int i = 0; i < new_str.length; ++i) {
+            String[] el = new_str[i].split(":");
+            if (!Objects.equals(el[1], "\"null\"")) {
+                str_bui.append(el[0].replace("\"", "")).append(" = ").append(el[1]);
+                if (i < new_str.length - 2) {
+                    str_bui.append(" and ");
+                }
             }
         }
-        result.delete(result.length() - 5, result.length());
-        return result.toString();
+        System.out.print(str_bui);
     }
 }
