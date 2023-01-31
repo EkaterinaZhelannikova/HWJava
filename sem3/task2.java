@@ -4,6 +4,7 @@
 package Sem3;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class task2 {
@@ -15,13 +16,11 @@ public class task2 {
             list.add(i, rand.nextInt(100));
         }
         System.out.println("Список чисел: " + list);
-        int min = list.get(0);
-        int max = list.get(0);
+        int min = Collections.min(list);
+        int max = Collections.max(list);
         double sum = 0;
 
         for (int i = 0; i < list.size(); i++) {
-            min = min > list.get(i) ? list.get(i) : min;
-            max = max < list.get(i) ? list.get(i) : max;
             sum += list.get(i);
         }
 
