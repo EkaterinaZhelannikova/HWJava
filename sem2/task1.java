@@ -17,16 +17,16 @@ public class task1 {
     public static void main(String[] args) {
         String str = param.replace("{", "").replace("}", "").replace(" ", "");
         String[] new_str = str.split(",");
-        StringBuilder str_bui = new StringBuilder(sql);
+        StringBuilder s = new StringBuilder(sql);
         for (int i = 0; i < new_str.length; ++i) {
             String[] el = new_str[i].split(":");
             if (!Objects.equals(el[1], "\"null\"")) {
-                str_bui.append(el[0].replace("\"", "")).append(" = ").append(el[1]);
+                s.append(el[0].replace("\"", "")).append(" = ").append(el[1]);
                 if (i < new_str.length - 2) {
-                    str_bui.append(" and ");
+                    s.append(" and ");
                 }
             }
         }
-        System.out.print(str_bui);
+        System.out.print(s);
     }
 }
